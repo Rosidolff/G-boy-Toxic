@@ -545,6 +545,23 @@ document.addEventListener('keydown', function (event) {
         }
     }
 });
+document.addEventListener('touchstart', function(event) {
+    if (escribiendo) {
+        // Completar inmediatamente el texto y detener la escritura
+        let escena = escenas[escenaActual];
+        document.getElementById('textoDialogo').innerHTML = escena.dialogo;
+        escribiendo = false;
+        return;
+    }
+    escenaActual++;
+    if (escenaActual < escenas.length) {
+        actualizarEscena();
+    } else {
+        // Fin del juego o reiniciar
+        escenaActual = 0;
+        actualizarEscena();
+    }
+});
 
 
 // Iniciar con la primera escena
